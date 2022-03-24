@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import client.Account;
-import client.ManagementSystem;
+import classes.Account;
+import classes.ManagementSystem;
 
 
 class testManagementSystem {
@@ -19,19 +19,17 @@ class testManagementSystem {
 	}
 
 	@Test
-	void testNumberOfAccountsEmptySystem() {
-		Account dummyAccount = system.createAccount();
-		
+	void testNumberOfAccountsEmptySystem() {		
 		int numAccounts = system.getNumAccounts();
 		
-		assertEquals(1, numAccounts);
+		assertEquals(0, numAccounts);
 	}
 	
 	@Test
 	void testNumAccountsWithExistingAccount() {
-		Account dummyAccountOne = system.createAccount();
+		Account dummyAccountOne = system.createAccount("","","","",1);
 		int numAccountsBefore = system.getNumAccounts();
-		Account dummyAccountTwo = system.createAccount();
+		Account dummyAccountTwo = system.createAccount("","","","",2);
 		
 		int numAccountsAfter = system.getNumAccounts();
 		
