@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import classes.Account;
 import classes.ManagementSystem;
+import classes.CommandLineApp;
 
 
 class testManagementSystem {
@@ -34,6 +35,21 @@ class testManagementSystem {
 		int numAccountsAfter = system.getNumAccounts();
 		
 		assertEquals(1, numAccountsAfter-numAccountsBefore);
+	}
+	
+	@Test
+	void testloginUserBadCredentials() {
+		Account returnedAccount = system.verifyUserCredentials("6Ad", "cr3d3ntiaLs");
+		assertEquals(null, returnedAccount);
+	}
+	
+	@Test
+	void testloginUserValidCredentials() {
+		Account dummyAccount = system.createAccount("a", "b", "", "", 0);
+		Account returnedAccount = system.verifyUserCredentials("a", "b");
+		
+		assertTrue(returnedAccount != null);
+		assertEquals(dummyAccount.hashCode(), returnedAccount.hashCode());
 	}
 	
 }
