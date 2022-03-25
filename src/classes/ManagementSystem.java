@@ -1,4 +1,4 @@
-package client;
+package classes;
 
 import java.util.ArrayList;
 
@@ -12,8 +12,8 @@ public class ManagementSystem {
 		this.numAccounts = 0;
 	}
 
-	public Account createAccount() {
-		Account account = new Account();
+	public Account createAccount(String username, String password, String legalName, String streetAddress, int grossIncome) {
+		Account account = new Account(username, password, legalName, streetAddress, grossIncome);
 		accounts.add(account);
 		this.numAccounts++;
 		return account;
