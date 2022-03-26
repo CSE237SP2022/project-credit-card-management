@@ -23,6 +23,29 @@ public class Account {
 		this.cards = new ArrayList<Card>();
 	}
 
+
+	public String getUsername() {
+		return this.username;
+	}
+
+
+	public int getHashedPassword() {
+		return this.password.hashCode();
+	}
+	
+	public String toString() {
+		String output = "";
+		output += "Name: " + this.legalName;
+		output += "\nUsername: " + this.username;
+		output += "\nAddress: " + this.streetAddress;
+		output += "\nIncome: " + this.grossIncome;
+		output += "\nCards: ";
+		for(Card card : this.cards) {
+			output += "\n\t" + card.getCardNumber();
+		}
+		return output;
+	}
+
 	
 
 	
