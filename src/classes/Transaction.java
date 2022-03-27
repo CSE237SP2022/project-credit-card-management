@@ -12,11 +12,11 @@ public class Transaction {
 	private String location;
 	
 	
-	public Transaction(double p, String m, String t, String l) {
-		this.price = p;
-		this.merchant = m;
-		this.time = t;
-		this.location = l;
+	public Transaction(double price, String merchant, String time, String location) {
+		this.price = price;
+		this.merchant = merchant;
+		this.time = time;
+		this.location = location;
 	}
 	
 	public double getPrice() {
