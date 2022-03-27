@@ -4,10 +4,6 @@ import java.util.ArrayList;
 
 public class Transaction {
 	
-	/* Should the Account have a method that executes a transaction by 
-	 * passing a Transaction, or vice versa? If the former, a Transaction is
-	 * basically a struct
-	 */
 	
 	
 	private double price;
@@ -23,5 +19,19 @@ public class Transaction {
 		this.location = l;
 	}
 	
+	public double getPrice() {
+		return this.price;
+	}
 	
+	public String getMerchant() {
+		return this.merchant;
+	}
+	
+	public String getTime() {
+		return this.time;
+	}
+	
+	public String getLocation() {
+		return this.location;
+	}
 }
