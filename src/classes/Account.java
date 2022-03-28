@@ -47,7 +47,7 @@ public class Account {
 	}
 	
 	public boolean spend(Card card) {
-		return null;
+		return false;
 	}
 
 	
