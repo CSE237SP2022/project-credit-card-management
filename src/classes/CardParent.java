@@ -72,5 +72,29 @@ public class CardParent{
 		return formattedString;
 	}
 	
+	public Integer[] getCardNumber()
+	{
+		return this.cardNumber;
+	}
+	
+	public Integer[] getCardCVV()
+	{
+		return this.CVV;
+	}
+	
+	public int getCardPin()
+	{
+		return this.pin;
+	}
+	
+	public String getName()
+	{
+		return this.name;
+	}
+	
+	public String getExpDate() 
+	{
+		return this.expDate;
+	}
 }
 
