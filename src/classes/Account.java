@@ -45,6 +45,10 @@ public class Account {
 		}
 		return output;
 	}
+	
+	public boolean spend(Card card) {
+		return null;
+	}
 
 	
 
