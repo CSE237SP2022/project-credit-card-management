@@ -34,4 +34,14 @@ public class Transaction {
 	public String getLocation() {
 		return this.location;
 	}
+	
+	public String toString() {
+		String output = "";
+		output += "Merchant: " + this.merchant;
+		output += "\nPrice: " + this.price;
+		output += "\nTime: " + this.time;
+		output += "\nLocation: " + this.location;
+		
+		return output;
+	}
 }
