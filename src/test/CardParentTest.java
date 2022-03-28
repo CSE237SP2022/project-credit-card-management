@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import classes.CardParent;
 
-
-
 class CardParentTest {
 	
 	private CardParent card;
@@ -26,11 +24,10 @@ class CardParentTest {
 		//Must be certain length: 16 digits
 		//Card Cannot start with the number 0
 		
-		Integer[] cardNumber = this.card.getCardNumber();
-		String cardNumberString = String.valueOf(cardNumber);
-		int cardNumberDigits = cardNumberString.length();
+		String cardNumber = this.card.getCardNumber();
+		int cardNumberDigits = cardNumber.length();
 		
-		char firstDigit = cardNumberString.charAt(0);
+		char firstDigit = cardNumber.charAt(0);
 		
 		assertEquals(16, cardNumberDigits);
 		assertNotEquals("0", firstDigit);
@@ -41,9 +38,8 @@ class CardParentTest {
 	{
 		//Must be certain length: 3 digits
 		
-		Integer[] cvvCode = this.card.getCardCVV();
-		String cardCVVString = String.valueOf(cvvCode);
-		int cvvCodeDigits = cardCVVString.length();
+		String cvvCode = this.card.getCardCVV();
+		int cvvCodeDigits = cvvCode.length();
 		
 		assertEquals(3, cvvCodeDigits);
 	}
@@ -122,43 +118,32 @@ class CardParentTest {
 	@Test
 	void testHasValidExpirationDate()
 	{
-		//2022-03-27
+		//Format 03/2022
 		
 		String date = this.card.getExpDate();
 		
-		String dateList[] = date.split("-");
+		String dateList[] = date.split("/");
 		
-		String year = dateList[0];
-		String month = dateList[1];
-		String day = dateList[2];
+		String year = dateList[1];
+		String month = dateList[0];
 		
 		int yearDigits = year.length();
 		int monthDigits = month.length();
-		int dayDigits = day.length();
 		
 		int yearInt = Integer.parseInt(year);
 		int monthInt = Integer.parseInt(month);
-		int dayInt = Integer.parseInt(day);
 		
 		boolean isMonthValid = false;
-		boolean isDayValid = false;
 		
 		if (monthInt>0 && monthInt<13)
 		{
 			isMonthValid = true;
 		}
 		
-		if (dayInt>0 && dayInt<32)
-		{
-			isDayValid = true;
-		}
-		
 		assertEquals(true, isMonthValid);
-		assertEquals(true, isDayValid);
 		
 		assertEquals(4, yearDigits);
 		assertEquals(2, monthDigits);
-		assertEquals(2, dayDigits);
 	}
 
 }

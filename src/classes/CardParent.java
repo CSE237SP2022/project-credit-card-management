@@ -9,8 +9,8 @@ import java.util.Random;
 public class CardParent{
 	
 	private String name;
-	private Integer[] cardNumber;
-	private Integer[] CVV;
+	private String cardNumber;
+	private String CVV;
 	private String expDate;
 	private int pin;
 	
@@ -22,62 +22,64 @@ public class CardParent{
 		this.cardNumber = generateCardNumber();
 		this.CVV = generateCVV();
 		this.expDate = generateExpDate();
-		
-		System.out.println(java.time.LocalDate.now());
-		
 	}	
 	
-	public Integer[] generateCardNumber()
+	public String generateCardNumber()
 	{
 		Random rand = new Random();
-		
-		ArrayList<Integer> cardNumberList  = new ArrayList<Integer>();
+		String cardNumber = "";
 		
 		int firstDigit = rand.nextInt(7 - 3) + 3;
-		cardNumberList.add(firstDigit);
+		String firstDigitString = Integer.toString(firstDigit);
+		cardNumber += firstDigitString;
 		
 		for(int i = 0; i < 15; i++)
 		{
 			int randomInt = rand.nextInt(10);
-			cardNumberList.add(randomInt);
+			String randomIntString = Integer.toString(randomInt);
+			cardNumber += randomIntString;
 		}
 		
-		Integer[] cardNumberArray = cardNumberList.toArray(new Integer[0]);
-		
-		return cardNumberArray;
+		return cardNumber;
 	}
 	
-	public Integer[] generateCVV()
+	public String generateCVV()
 	{
 		Random rand = new Random();
-		ArrayList<Integer> cvvNumberList  = new ArrayList<Integer>();
+		String cardNumber = "";
 		
 		for(int i = 0; i < 3; i++)
 		{
 			int randomInt = rand.nextInt(10);
-			cvvNumberList.add(randomInt);
+			String randomIntString = Integer.toString(randomInt);
+			cardNumber += randomIntString;
 		}
 		
-		Integer[] cvvNumberArray = cvvNumberList.toArray(new Integer[0]);
-		
-		return cvvNumberArray;
+		return cardNumber;
 	}
 	
 	public String generateExpDate()
 	{
 		LocalDate today = java.time.LocalDate.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
-		String formattedString = today.format(formatter);
-
-		return formattedString;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
+		String formattedDateString = today.format(formatter);
+		String date[] = formattedDateString.split("/");
+		
+		int currYear = Integer.parseInt(date[1]);  
+		int expYear = currYear+2;
+		
+		String expYearString = Integer.toString(expYear);
+		String expDate = date[0] + "/" + expYearString;
+		
+		return expDate;
 	}
 	
-	public Integer[] getCardNumber()
+	public String getCardNumber()
 	{
 		return this.cardNumber;
 	}
 	
-	public Integer[] getCardCVV()
+	public String getCardCVV()
 	{
 		return this.CVV;
 	}
