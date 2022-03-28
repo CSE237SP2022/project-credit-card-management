@@ -12,44 +12,55 @@ import classes.CommandLineApp;
 
 class testManagementSystem {
 	
-	private ManagementSystem system;
+	private ManagementSystem emptySystem;
+	private ManagementSystem existingSystem;
 	
 	@BeforeEach
 	void setup() {
-		system = new ManagementSystem();
+		emptySystem = new ManagementSystem();
+		existingSystem = new ManagementSystem("test.txt");
 	}
 
 	@Test
 	void testNumberOfAccountsEmptySystem() {		
-		int numAccounts = system.getNumAccounts();
+		int numAccounts = emptySystem.getNumAccounts();
 		
 		assertEquals(0, numAccounts);
 	}
 	
 	@Test
 	void testNumAccountsWithExistingAccount() {
-		Account dummyAccountOne = system.createAccount("","","","",1);
-		int numAccountsBefore = system.getNumAccounts();
-		Account dummyAccountTwo = system.createAccount("","","","",2);
+		Account dummyAccountOne = emptySystem.createAccount("","","","",1);
+		int numAccountsBefore = emptySystem.getNumAccounts();
+		Account dummyAccountTwo = emptySystem.createAccount("","","","",2);
 		
-		int numAccountsAfter = system.getNumAccounts();
+		int numAccountsAfter = emptySystem.getNumAccounts();
 		
 		assertEquals(1, numAccountsAfter-numAccountsBefore);
 	}
 	
 	@Test
 	void testloginUserBadCredentials() {
-		Account returnedAccount = system.verifyUserCredentials("6Ad", "cr3d3ntiaLs");
+		Account returnedAccount = emptySystem.verifyUserCredentials("6Ad", "cr3d3ntiaLs");
 		assertEquals(null, returnedAccount);
 	}
 	
 	@Test
 	void testloginUserValidCredentials() {
-		Account dummyAccount = system.createAccount("a", "b", "", "", 0);
-		Account returnedAccount = system.verifyUserCredentials("a", "b");
+		Account dummyAccount = emptySystem.createAccount("a", "b", "", "", 0);
+		Account returnedAccount = emptySystem.verifyUserCredentials("a", "b");
 		
 		assertTrue(returnedAccount != null);
 		assertEquals(dummyAccount.hashCode(), returnedAccount.hashCode());
+	}
+	
+	@Test
+	void testCreateAccountsFromFile(){
+		int numAccounts = existingSystem.getNumAccounts();
+		
+		assertEquals(2, numAccounts);
+		Account validAccount = existingSystem.verifyUserCredentials("username", "password12345");
+		assertTrue(validAccount != null);
 	}
 	
 }
