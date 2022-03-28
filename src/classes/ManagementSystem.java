@@ -43,18 +43,14 @@ public class ManagementSystem {
 		String[] accountInformation = null;
 		while(fileScanner.hasNextLine()) {
 			 accountInformation = fileScanner.nextLine().split(";");
-		}
-		
-		System.out.println();
-		if(accountInformation != null && accountInformation.length == 5) {
-			String username = accountInformation[0].replace(";", "");
-			String password = accountInformation[1].replace(";", "");
-			String legalName = accountInformation[2].replace(";", "");
-			String streetAddress = accountInformation[3].replace(";", "");
-			int grossIncome = Integer.parseInt(accountInformation[4]);
-			Account account = this.createAccount(username, password, legalName, streetAddress, grossIncome);
-			this.accounts.add(account);
-			this.numAccounts++;
+			 if(accountInformation != null && accountInformation.length == 5) {
+					String username = accountInformation[0].replace(";", "");
+					String password = accountInformation[1].replace(";", "");
+					String legalName = accountInformation[2].replace(";", "");
+					String streetAddress = accountInformation[3].replace(";", "");
+					int grossIncome = Integer.parseInt(accountInformation[4]);
+					Account account = this.createAccount(username, password, legalName, streetAddress, grossIncome);
+			}
 		}
 	}
 	
