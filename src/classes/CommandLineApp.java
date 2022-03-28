@@ -13,12 +13,21 @@ public class CommandLineApp {
 	private static void runUserAccountMenu(Account userAccount) {
 		if(userAccount == null) return;
 		String userInput = "";
+		promptUserMenuOptions();
+		userInput = getUserInfoString();
 		while(!userInput.equals("QUIT")) {
+			try{
+				int choice = Integer.parseInt(userInput);
+				if(choice == 0) {
+					System.out.println(userAccount.toString());
+				}
+			}
+			catch(NumberFormatException e) {
+				System.out.println("Pick a valid menu option!");
+			}
+			
 			promptUserMenuOptions();
 			userInput = getUserInfoString();
-			if(Integer.parseInt(userInput) == 0) {
-				System.out.println(userAccount.toString());
-			}
 		}
 	}
 	
