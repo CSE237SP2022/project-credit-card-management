@@ -5,19 +5,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import classes.CardParent;
+import classes.Card;
 
-
-
-class CardParentTest {
+class CardTest {
 	
-	private CardParent card;
+	private Card card;
+	
 
 	@BeforeEach
 	void setup() {
 		String name = "George Washington";
 		int pin = 1234;
-		card = new CardParent(name, pin);
+		card = new Card(name, pin);
 	}
 	
 	@Test

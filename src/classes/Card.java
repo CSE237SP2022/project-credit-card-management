@@ -5,8 +5,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Random;
+//import Transaction.java;
 
-public class CardParent{
+public class Card{
 	
 	private String name;
 	private Integer[] cardNumber;
@@ -14,7 +15,7 @@ public class CardParent{
 	private String expDate;
 	private int pin;
 	
-	public CardParent(String name, int pin)
+	public Card(String name, int pin)
 	{
 		//Auto-generate card number, CVV, and expiration date
 		this.name = name;
