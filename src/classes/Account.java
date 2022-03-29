@@ -46,8 +46,9 @@ public class Account {
 		return output;
 	}
 	
-	public boolean spend(Card card) {
-		return false;
+	public Transaction spend(Card card, Transaction transaction) {
+		transaction = card.spend(transaction);
+		return transaction;
 	}
 
 	
