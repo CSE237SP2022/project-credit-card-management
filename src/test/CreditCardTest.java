@@ -64,4 +64,68 @@ class CreditCardTest {
 		
 		assertEquals(creditLimit, avaliableBalance);
 	}
+	
+	@Test
+	void testOverspend() 
+	{	
+		this.creditCard.spend(2000.00);
+		this.creditCard.spend(2000.00);
+		this.creditCard.spend(2000.00);
+		this.creditCard.spend(2000.00);
+		
+		double currentBalance = this.creditCard.getCurrentBalance();
+		double avaliableBalance = this.creditCard.getAvailableBalance();
+		
+		assertEquals(6000, currentBalance);
+		assertEquals(500, avaliableBalance);
+	}
+	
+	@Test
+	void testPayBillValidAmount() 
+	{	
+		double amountSpent = 2500.00;
+		double amountPayed = 475.50;
+		this.creditCard.spend(amountSpent);
+		this.creditCard.payBill(amountPayed);
+		
+		double currentBalance = this.creditCard.getCurrentBalance();
+		double avaliableBalance = this.creditCard.getAvailableBalance();
+		double creditLimit = this.creditCard.getCreditLimit();
+		
+		assertEquals(amountSpent-amountPayed, currentBalance);
+		assertEquals(creditLimit-amountSpent+amountPayed, avaliableBalance);
+	}
+	
+	@Test
+	void testPayBillInvalidAmountExcedeBalance() 
+	{	
+		double amountSpent = 450.00;
+		double amountPayed = 475.50;
+		this.creditCard.spend(amountSpent);
+		this.creditCard.payBill(amountPayed);
+		
+		double currentBalance = this.creditCard.getCurrentBalance();
+		double avaliableBalance = this.creditCard.getAvailableBalance();
+		double creditLimit = this.creditCard.getCreditLimit();
+		
+		assertEquals(amountSpent, currentBalance);
+		assertEquals(creditLimit-amountSpent, avaliableBalance);
+	}
+	
+	@Test
+	void testPayBillInvalidAmountDecimalError() 
+	{	
+		double amountSpent = 450.00;
+		double amountPayed = 250.666;
+		this.creditCard.spend(amountSpent);
+		this.creditCard.payBill(amountPayed);
+		
+		double currentBalance = this.creditCard.getCurrentBalance();
+		double avaliableBalance = this.creditCard.getAvailableBalance();
+		double creditLimit = this.creditCard.getCreditLimit();
+		
+		assertEquals(amountSpent, currentBalance);
+		assertEquals(creditLimit-amountSpent, avaliableBalance);
+	}
+	
 }

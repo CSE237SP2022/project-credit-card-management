@@ -67,4 +67,41 @@ public class CreditCard extends CardParent
 		}
 	}
 	
+	public void payBill(double amountPayed)
+	{
+		if (this.currentBalance >= amountPayed)
+		{
+			String amountPayedString = Double.toString(amountPayed);
+			String amountPayedValueList[] = amountPayedString.split("\\.");
+			
+			if (amountPayedValueList.length > 1)
+			{
+				String cents = amountPayedValueList[1];
+				
+				if (cents.length() > 2)
+				{
+					System.out.println("Pay a valid amount");
+					return;
+				}
+				
+				else
+				{
+					this.availableBalance += amountPayed;
+					this.currentBalance -= amountPayed;
+				}
+			}
+			
+			else if (amountPayedValueList.length == 1)
+			{
+				this.availableBalance += amountPayed;
+				this.currentBalance -= amountPayed;
+			}
+		}
+		
+		else
+		{
+			System.out.println("Payment excedes balance");
+			return;
+		}
+	}
 }
