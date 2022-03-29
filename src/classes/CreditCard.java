@@ -1,6 +1,6 @@
 package classes;
 
-public class CreditCard extends CardParent
+public class CreditCard extends Card
 {
 	private double currentBalance;//Amount spent
 	private double availableBalance;//Amount available
