@@ -27,7 +27,7 @@ class DebitCardTest {
 	
 	
 	@Test
-	void testDeposit()
+	void testDepositDecimalCorrectAmount()
 	{
 		double depositAmount = 14.50;
 		debitCard.deposit(depositAmount);
@@ -37,7 +37,27 @@ class DebitCardTest {
 	}
 	
 	@Test
-	void testWithdraw()
+	void testDepositDecimalIncorrectAmount()
+	{
+		double depositAmount = 14.555;
+		debitCard.deposit(depositAmount);
+		
+		double balance = debitCard.getBalance();
+		assertEquals(0, balance);
+	}
+	
+	@Test
+	void testDepositNoDecimalAmount()
+	{
+		double depositAmount = 14;
+		debitCard.deposit(depositAmount);
+		
+		double balance = debitCard.getBalance();
+		assertEquals(14, balance);
+	}
+	
+	@Test
+	void testWithdrawDecimalCorrectAmount()
 	{
 		double depositAmount = 14.50;
 		double withdrawAmount = 4.75; 
@@ -48,6 +68,27 @@ class DebitCardTest {
 		assertEquals(depositAmount-withdrawAmount, balance);
 	}
 	
+	@Test
+	void testWithdrawDecimalIncorrectAmount()
+	{
+		double depositAmount = 14.50;
+		double withdrawAmount = 4.7557; 
+		debitCard.deposit(depositAmount);
+		debitCard.withdraw(withdrawAmount);
+		
+		double balance = debitCard.getBalance();
+		assertEquals(depositAmount, balance);
+	}
 	
-
+	@Test
+	void testWithdrawNoDecimalAmount()
+	{
+		double depositAmount = 14.50;
+		double withdrawAmount = 4; 
+		debitCard.deposit(depositAmount);
+		debitCard.withdraw(withdrawAmount);
+		
+		double balance = debitCard.getBalance();
+		assertEquals(depositAmount-withdrawAmount, balance);
+	}
 }
