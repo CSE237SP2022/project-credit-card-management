@@ -1,6 +1,6 @@
 package classes;
 
-public class DebitCard extends CardParent
+public class DebitCard extends Card
 {
 	private double balance;
 	
