@@ -1,8 +1,9 @@
 package classes;
 
 import java.util.ArrayList;
+import classes.DebitCard;
+import classes.CreditCard;
 
-import classes.Card;
 
 public class Account {
 	
@@ -10,17 +11,20 @@ public class Account {
 	private String password;
 	private String legalName;
 	private String streetAddress;
-	private int grossIncome;
-	private ArrayList<Card> cards;
+	private double grossIncome;
+	//private ArrayList<Card> cards;
+	private ArrayList<DebitCard> debitCards;
+	private ArrayList<CreditCard> creditCards;
 	
 	
-	public Account(String username, String password, String legalName, String streetAddress, int grossIncome) {
+	public Account(String username, String password, String legalName, String streetAddress, double grossIncome) {
 		this.username = username;
 		this.password = password;
 		this.legalName = legalName;
 		this.streetAddress = streetAddress;
 		this.grossIncome = grossIncome;
-		this.cards = new ArrayList<Card>();
+		this.debitCards = new ArrayList<>();
+		this.creditCards = new ArrayList<>();
 	}
 
 
@@ -39,8 +43,12 @@ public class Account {
 		output += "\nUsername: " + this.username;
 		output += "\nAddress: " + this.streetAddress;
 		output += "\nIncome: " + this.grossIncome;
-		output += "\nCards: ";
-		for(Card card : this.cards) {
+		output += "\nDebit Cards: ";
+		for(DebitCard card : this.debitCards) {
+			output += "\n\t" + card.getCardNumber();
+		}
+		output += "\nCredit Cards: ";
+		for(CreditCard card : this.creditCards) {
 			output += "\n\t" + card.getCardNumber();
 		}
 		return output;
@@ -51,7 +59,45 @@ public class Account {
 		return transaction;
 	}
 
+	public void makeDebitCard()
+	{
+		int pin = 1234;
+		DebitCard newDebitCard = new DebitCard(this.legalName, pin);
+		this.debitCards.add(newDebitCard);
+	}
 	
+	public void makeCreditCard()
+	{
+		int pin = 1234; 
+		CreditCard newCreditCard = new CreditCard(this.legalName, pin, this.grossIncome);
+		this.creditCards.add(newCreditCard);
+	}
+	
+	public DebitCard containsDebitCard(String cardNumber)
+	{	
+		for(DebitCard card : this.debitCards)
+		{
+			if (card.getCardNumber().equals(cardNumber))
+			{
+				return card;
+			}
+		}
+		
+		return null;
+	}
+	
+	public CreditCard containsCreditCard(String cardNumber)
+	{	
+		for(CreditCard card : this.creditCards)
+		{
+			if (card.getCardNumber().equals(cardNumber))
+			{
+				return card;
+			}
+		}
+		
+		return null;
+	}
 
 	
 }
