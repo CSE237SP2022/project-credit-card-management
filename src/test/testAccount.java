@@ -1,10 +1,9 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import classes.Account;
 import classes.CreditCard;
@@ -23,6 +22,7 @@ public class testAccount {
 		account = new Account("dummy", "password", "John Smith", "1 Brookings Dr.", 100000);
 	}
 	
+	@Test
 	void testSpendCreditNoCostNoLimit() {
 		CreditCard creditCard = new CreditCard("creditNoLimit", 1234, 0);
 		Transaction transaction = new Transaction(0, "", "", "");
@@ -35,6 +35,7 @@ public class testAccount {
 		assertEquals(balanceBefore, balanceAfter, 0.001);
 	}
 	
+	@Test
 	void testSpendCreditSmallCost() {
 		CreditCard creditCard = new CreditCard("creditWithLimit", 1234, 10000);
 		Transaction lunch = new Transaction(10, "BD", "Nooon", "Clayton, MO");
@@ -48,6 +49,7 @@ public class testAccount {
 		assertEquals(10, balanceBefore-balanceAfter, 0.001);
 	}
 	
+	@Test
 	void testSpendCreditOverBalance() {
 		CreditCard creditCard = new CreditCard("creditWithLowLimit", 1234, 1);
 		Transaction car = new Transaction(20000, "Ford", "", "NYC");
@@ -61,29 +63,31 @@ public class testAccount {
 		assertEquals(balanceBefore, balanceAfter, 0.001);
 	}
 	
+	@Test
 	void testSpendDebit() {
 		DebitCard debitCard = new DebitCard("debit", 500);
 		Transaction lunch = new Transaction(10, "BD", "Nooon", "Clayton, MO");
 		
-		double balanceBefore = debitCard.getAvailableBalance()
+		double balanceBefore = debitCard.getBalance();
 	
 		boolean success = account.spend(debitCard, lunch);
-		double balanceAfter = debitCard.getAvailableBalance();
+		double balanceAfter = debitCard.getBalance();
 		
 		assertEquals(balanceBefore-10, balanceAfter, 0.001);
 	}
 	
+	@Test
 	void testSpendDebitLowBalance() {
 		DebitCard debitCard = new DebitCard("debit", 5);
 		Transaction lunch = new Transaction(10, "BD", "Nooon", "Clayton, MO");
 		
-		double balanceBefore = debitCard.getAvailableBalance()
+		double balanceBefore = debitCard.getBalance();
 	
 		boolean success = account.spend(debitCard, lunch);
-		double balanceAfter = debitCard.getAvailableBalance();
+		double balanceAfter = debitCard.getBalance();
 		
 		assertTrue(!success);
-		assertEquals(balanceBefore, balanceAfter);
+		assertEquals(balanceBefore, balanceAfter, 0.001);
 		
 	}
 	
