@@ -58,6 +58,11 @@ public class Account {
 		card.spend(transaction.getPrice());
 		return true;
 	}
+	
+	public boolean spend(DebitCard card, Transaction transaction) {
+		card.withdraw(transaction.getPrice());
+		return true;
+	}
 
 	public void makeDebitCard()
 	{

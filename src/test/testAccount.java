@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import classes.Account;
 import classes.CreditCard;
+import classes.DebitCard;
 import classes.Transaction;
 
 public class testAccount {
@@ -59,4 +60,32 @@ public class testAccount {
 		assertTrue(!success);
 		assertEquals(balanceBefore, balanceAfter, 0.001);
 	}
+	
+	void testSpendDebit() {
+		DebitCard debitCard = new DebitCard("debit", 500);
+		Transaction lunch = new Transaction(10, "BD", "Nooon", "Clayton, MO");
+		
+		double balanceBefore = debitCard.getAvailableBalance()
+	
+		boolean success = account.spend(debitCard, lunch);
+		double balanceAfter = debitCard.getAvailableBalance();
+		
+		assertEquals(balanceBefore-10, balanceAfter, 0.001);
+	}
+	
+	void testSpendDebitLowBalance() {
+		DebitCard debitCard = new DebitCard("debit", 5);
+		Transaction lunch = new Transaction(10, "BD", "Nooon", "Clayton, MO");
+		
+		double balanceBefore = debitCard.getAvailableBalance()
+	
+		boolean success = account.spend(debitCard, lunch);
+		double balanceAfter = debitCard.getAvailableBalance();
+		
+		assertTrue(!success);
+		assertEquals(balanceBefore, balanceAfter);
+		
+	}
+	
+	
 }
