@@ -54,9 +54,9 @@ public class Account {
 		return output;
 	}
 	
-	public Transaction spend(Card card, Transaction transaction) {
-		transaction = card.spend(transaction);
-		return transaction;
+	public boolean spend(CreditCard card, Transaction transaction) {
+		card.spend(transaction.getPrice());
+		return true;
 	}
 
 	public void makeDebitCard()
