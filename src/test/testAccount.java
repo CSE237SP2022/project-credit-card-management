@@ -67,12 +67,14 @@ public class testAccount {
 	void testSpendDebit() {
 		DebitCard debitCard = new DebitCard("debit", 500);
 		Transaction lunch = new Transaction(10, "BD", "Nooon", "Clayton, MO");
+		debitCard.deposit(15);
 		
 		double balanceBefore = debitCard.getBalance();
 	
 		boolean success = account.spend(debitCard, lunch);
 		double balanceAfter = debitCard.getBalance();
 		
+		assertTrue(success);
 		assertEquals(balanceBefore-10, balanceAfter, 0.001);
 	}
 	
