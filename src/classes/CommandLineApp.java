@@ -7,7 +7,8 @@ public class CommandLineApp {
 	public static void main(String[] args) {
 		final String accountsFile = "accounts.txt";
 		final String debitCardsFile = "debitCards.txt";
-		ManagementSystem system = new ManagementSystem(accountsFile, debitCardsFile);
+		final String creditCardsFile = "creditCards.txt";
+		ManagementSystem system = new ManagementSystem(accountsFile, debitCardsFile, creditCardsFile);
 		runUserAccountMenu(loginUser(system));
 	}
 	

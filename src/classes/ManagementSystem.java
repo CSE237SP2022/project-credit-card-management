@@ -15,14 +15,16 @@ public class ManagementSystem {
 		this.numAccounts = 0;
 	}
 
-	public ManagementSystem(String accountsFileName, String debitCardsFileName) {
+	public ManagementSystem(String accountsFileName, String debitCardsFileName, String creditCardsFileName) {
 		this.accounts = new ArrayList<Account>();
 		this.numAccounts = 0;
 		
 		String accountsFilePath = "systemFiles/"+accountsFileName;
 		String debitCardsFilePath = "systemFiles/"+debitCardsFileName;
+		String creditCardsFilePath = "systemFiles/"+creditCardsFileName;
 		File accountsFile = new File(accountsFilePath);
 		File debitCardsFile = new File(debitCardsFilePath);
+		File creditCardsFile = new File(creditCardsFilePath);
 		
 		try {
 			Scanner fileScanner = new Scanner(accountsFile);
@@ -31,6 +33,10 @@ public class ManagementSystem {
 			
 			fileScanner = new Scanner(debitCardsFile);
 			createCardsFromFile(fileScanner);
+			
+			fileScanner = new Scanner(creditCardsFile);
+			createCardsFromFile(fileScanner);
+			
 			fileScanner.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -65,24 +71,24 @@ public class ManagementSystem {
 		while(fileScanner.hasNextLine()) {
 			 cardInformation = fileScanner.nextLine().split(";");
 			 if(cardInformation == null) continue;
-			 else if(cardInformation.length == 5) {
-				String username = cardInformation[0].replace(";", "");
-				int pin = Integer.parseInt(cardInformation[1]);
-				String cardNumber = cardInformation[2].replace(";", "");
-				String CVV = cardInformation[3].replace(";", "");
-				String expDate = cardInformation[4].replace(";", "");
-				DebitCard card = new DebitCard(username, pin, cardNumber, CVV, expDate);
-				this.addCardToAccount(username, card);
+			 
+			 Card card = null;
+			 String username = cardInformation[0].replace(";", "");
+			 int pin = Integer.parseInt(cardInformation[1]);
+			 String cardNumber = cardInformation[2].replace(";", "");
+			 String CVV = cardInformation[3].replace(";", "");
+			 String expDate = cardInformation[4].replace(";", "");
+			 
+			 if(cardInformation.length == 5) {
+				card = new DebitCard(username, pin, cardNumber, CVV, expDate);
 			 }
-			 else {
-//				String username = cardInformation[0].replace(";", "");
-//				int pin = Integer.parseInt(cardInformation[1]);
-//				String cardNumber = cardInformation[2].replace(";", "");
-//				String CVV = cardInformation[3].replace(";", "");
-//				String expDate = cardInformation[4].replace(";", "");
-//				DebitCard card = new DebitCard(username, pin, cardNumber, CVV, expDate);
-//				this.addCardToAccount(username, card);
+			 else if(cardInformation.length == 6){
+				Double limit = Double.parseDouble(cardInformation[5]);
+				card = new CreditCard(username, pin, cardNumber, CVV, expDate, limit);
 			 }
+			 
+			 this.addCardToAccount(username, card);
+
 		}
 	}
 	
@@ -112,6 +118,7 @@ public class ManagementSystem {
 	}
 
 	public void addCardToAccount(String username, Card card) {
+		if(card == null) return;
 		Account account = getAccountFromUsername(username);
 		if(account == null) return;
 		if(card.isCreditCard()) {

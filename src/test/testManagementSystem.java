@@ -18,7 +18,7 @@ class testManagementSystem {
 	@BeforeEach
 	void setup() {
 		emptySystem = new ManagementSystem();
-		existingSystem = new ManagementSystem("test.txt", "debitCards.txt");
+		existingSystem = new ManagementSystem("test.txt", "debitCards.txt", "creditCards.txt");
 	}
 
 	@Test
@@ -68,6 +68,13 @@ class testManagementSystem {
 		Account account = existingSystem.getAccountFromUsername("dwusername");
 		assertFalse(account == null);
 		assertFalse(account.containsDebitCard("4739170295563549") == null);
+	}
+	
+	@Test
+	void testCreateCreditCardsFromFile() {
+		Account account = existingSystem.getAccountFromUsername("dwusername");
+		assertFalse(account == null);
+		assertFalse(account.containsCreditCard("6786141510068532") == null);
 	}
 	
 }
