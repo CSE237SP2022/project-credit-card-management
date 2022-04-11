@@ -68,6 +68,9 @@ class testManagementSystem {
 		Account account = existingSystem.getAccountFromUsername("dwusername");
 		assertFalse(account == null);
 		assertFalse(account.containsDebitCard("4739170295563549") == null);
+		assertFalse(account.containsDebitCard("4730000111224422") == null);
+		assertTrue(account.containsDebitCard("0000") == null);
+
 	}
 	
 	@Test
