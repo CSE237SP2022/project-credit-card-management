@@ -70,6 +70,51 @@ public class ManagementSystem {
 		return numAccounts;
 	}
 
-
+	public ArrayList<Card> getCardsFromFile(String fileName) {
+		ArrayList<Card> cards = new ArrayList<Card>();
+		String path = "systemFiles/" + fileName;
+		Scanner scan = null;
+		
+		try {
+			scan = new Scanner(new File(path));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		scan.nextLine();
+		
+		while (scan.hasNextLine()) {
+			String[] cardInfo = scan.nextLine().split(";");
+			cards.add(createCardFromInfo(cardInfo));
+		}
+		
+		scan.close();
+		return cards;
+	}
+	
+	private Card createCardFromInfo(String[] cardInfo) {
+		String name = cardInfo[1].replace(";", "");
+		int pin = Integer.parseInt(cardInfo[2].replace(";", ""));
+		String cardNumber = cardInfo[3].replace(";", "");
+		String cvv = cardInfo[4].replace(";", "");
+		
+		if (cardInfo[0].replace(";", "") == "debit") {
+			DebitCard card = new DebitCard(name, pin);
+			card.setCardNumber(cardNumber);
+			card.setCardCVV(cvv);
+			
+			return card;
+			
+		} else if (cardInfo[0].replace(";", "") == "debit") {
+			double income = Double.parseDouble(cardInfo[5].replace(";",""));
+			CreditCard card = new CreditCard(name, pin, income);
+			card.setCardNumber(cardNumber);
+			card.setCardCVV(cvv);
+			
+			return card;
+		}
+		
+		return null;
+	}
 	
 }

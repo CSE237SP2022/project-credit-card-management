@@ -14,6 +14,7 @@ public class CreditCard extends Card
 		this.availableBalance = this.creditLimit;
 	}
 	
+
 	public double getCurrentBalance()
 	{
 		return this.currentBalance;

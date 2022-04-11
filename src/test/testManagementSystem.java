@@ -70,25 +70,11 @@ class testManagementSystem {
 	
 	
 	@Test
-	void testGetCardFromFileDebit() {
-		String path = "systemFiles/testDebitCard.txt";
+	void testGetCardFromFileDebit() {		
+		String fileName = "testDebitCard.txt";
+		Card card = existingSystem.getCardsFromFile(fileName).get(0);
 		
-//		Card card;
-//		
-//		String[] cardInfo = scan.nextLine().split(";");
-//		
-//		String type = cardInfo[0].replace(";", "");
-//		String name = cardInfo[1].replace(";", "");
-//		int pin = Integer.parseInt(cardInfo[2].replace(";", ""));
-//		
-//		if (type == "credit") {
-//			double income = Double.parseDouble(cardInfo[3].replace(";",""));
-//			card = new CreditCard(name, pin, income);
-//		} else if (type == "debit") {
-//			card = new DebitCard(name, pin);
-//		}
 		
-		DebitCard card = getCardsFromFile(path)[0];
 		
 		assertEquals("testDebit", card.getName());
 		assertEquals(1234, card.getCardPin());
@@ -98,15 +84,13 @@ class testManagementSystem {
 	
 	@Test
 	void testGetCardFromFileCredit() {
-		String path = "systemFiles/testCreditCard.txt";
-		Scanner scan = new Scanner(path);
+		String fileName = "testCreditCard.txt";		
+		Card card = existingSystem.getCardsFromFile(fileName).get(0);
 		
-		CreditCard card = getCardFromFile(path, scan);
-		
-		assertEquals("testCredit", card.getName()));
+		assertEquals("testCredit", card.getName());
 		assertEquals(5678, card.getCardPin());
 		assertEquals("3000000000000000", card.getCardPin());
-		assertEquals(1000, card.getAvailableBalance());
+		assertEquals(1000, ((CreditCard) card).getAvailableBalance());
 	}
 	
 	

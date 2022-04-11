@@ -98,5 +98,13 @@ public class Card{
 	{
 		return this.expDate;
 	}
+	
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
+	}
+	
+	public void setCardCVV(String cvv) {
+		this.CVV = cvv;
+	}
 }
 
