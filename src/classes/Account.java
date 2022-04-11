@@ -53,6 +53,22 @@ public class Account {
 		}
 		return output;
 	}
+	
+	public boolean spend(CreditCard card, Transaction transaction) {
+		if (card.getAvailableBalance() >= transaction.getPrice()) {
+			card.spend(transaction.getPrice());
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean spend(DebitCard card, Transaction transaction) {
+		if (card.getBalance() >= transaction.getPrice()) {
+			card.withdraw(transaction.getPrice());
+			return true;
+		}
+		return false;
+	}
 
 	public void makeDebitCard()
 	{
