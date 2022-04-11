@@ -84,6 +84,14 @@ public class Account {
 		this.creditCards.add(newCreditCard);
 	}
 	
+	public void addExistingDebitCard(DebitCard card) {
+		this.debitCards.add(card);
+	}
+	
+	public void addExistingCreditCard(CreditCard card) {
+		this.creditCards.add(card);
+	}
+	
 	public DebitCard containsDebitCard(String cardNumber)
 	{	
 		for(DebitCard card : this.debitCards)
