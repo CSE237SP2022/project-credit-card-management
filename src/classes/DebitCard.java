@@ -8,6 +8,11 @@ public class DebitCard extends Card
 	{
 		super(name, pin);
 		this.balance = 0;
+		this.setIsCreditCard(false);
+	}
+	
+	public DebitCard(String name, int pin, String cardNumber, String CVV, String expDate) {
+		super(name, pin, cardNumber, CVV, expDate);
 	}
 	
 	public double getBalance()
