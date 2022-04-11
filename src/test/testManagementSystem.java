@@ -2,12 +2,17 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Scanner;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import classes.Account;
+import classes.Card;
 import classes.ManagementSystem;
 import classes.CommandLineApp;
+import classes.CreditCard;
+import classes.DebitCard;
 
 
 class testManagementSystem {
@@ -62,5 +67,54 @@ class testManagementSystem {
 		Account validAccount = existingSystem.verifyUserCredentials("username", "password12345");
 		assertTrue(validAccount != null);
 	}
+	
+	
+	@Test
+	void testGetCardFromFileDebit() {
+		String path = "systemFiles/testDebitCard.txt";
+		
+//		Card card;
+//		
+//		String[] cardInfo = scan.nextLine().split(";");
+//		
+//		String type = cardInfo[0].replace(";", "");
+//		String name = cardInfo[1].replace(";", "");
+//		int pin = Integer.parseInt(cardInfo[2].replace(";", ""));
+//		
+//		if (type == "credit") {
+//			double income = Double.parseDouble(cardInfo[3].replace(";",""));
+//			card = new CreditCard(name, pin, income);
+//		} else if (type == "debit") {
+//			card = new DebitCard(name, pin);
+//		}
+		
+		DebitCard card = getCardsFromFile(path)[0];
+		
+		assertEquals("testDebit", card.getName());
+		assertEquals(1234, card.getCardPin());
+		assertEquals("4000000000000000", card.getCardNumber());
+		
+	}
+	
+	@Test
+	void testGetCardFromFileCredit() {
+		String path = "systemFiles/testCreditCard.txt";
+		Scanner scan = new Scanner(path);
+		
+		CreditCard card = getCardFromFile(path, scan);
+		
+		assertEquals("testCredit", card.getName()));
+		assertEquals(5678, card.getCardPin());
+		assertEquals("3000000000000000", card.getCardPin());
+		assertEquals(1000, card.getAvailableBalance());
+	}
+	
+	
+	@Test
+	void testLoadCardIntoFile() {
+		
+	}
+	
+	
 	
 }
