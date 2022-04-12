@@ -1,6 +1,8 @@
 package classes;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+
 import classes.DebitCard;
 import classes.CreditCard;
 
@@ -116,6 +118,34 @@ public class Account {
 		}
 		
 		return null;
+	}
+	
+	public void editAccountDetail() {
+		System.out.println("Enter which detail you would like to edit:\n-username\n-password\n-income\n>>>");
+		Scanner scan = new Scanner(System.in);
+		String userInput = scan.nextLine();
+		
+		try {
+			if (userInput.equals("password")) {
+				System.out.println("Enter new password: ");
+				this.password = scan.nextLine();
+			} else if (userInput.equals("username")) {
+				System.out.println("Enter new username: ");
+				this.username = scan.nextLine();
+			} else if (userInput.equals("income")) {
+				System.out.println("Enter new income: ");
+				this.grossIncome = Double.parseDouble(scan.nextLine());
+			} else {
+				System.out.println("Edit failed!");
+				return;
+			}
+			
+		} catch (java.util.InputMismatchException e){
+			System.out.println("Error: invalid input!");
+		}
+		
+		System.out.println("Edit successful");
+		
 	}
 
 	
