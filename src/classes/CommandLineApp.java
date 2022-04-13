@@ -40,6 +40,10 @@ public class CommandLineApp {
 					accessCreditCard(userAccount);
 				}
 				
+				else if (choice == 5) {
+					userAccount.editAccountDetail();
+				}
+				
 			}
 			catch(NumberFormatException e) {
 				System.out.println("Pick a valid menu option!");
@@ -172,6 +176,7 @@ public class CommandLineApp {
 		System.out.println("2 - make credit card");
 		System.out.println("3 - access debit card");
 		System.out.println("4 - access credit card");
+		System.out.println("5 - edit account details");
 		System.out.println("QUIT - exit this menu");
 		System.out.print(">>> ");
 	}
