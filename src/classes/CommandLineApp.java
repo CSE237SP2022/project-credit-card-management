@@ -5,10 +5,7 @@ import java.util.Scanner;
 public class CommandLineApp {
 	
 	public static void main(String[] args) {
-		final String accountsFile = "accounts.txt";
-		final String debitCardsFile = "debitCards.txt";
-		final String creditCardsFile = "creditCards.txt";
-		ManagementSystem system = new ManagementSystem(accountsFile, debitCardsFile, creditCardsFile);
+		ManagementSystem system = new ManagementSystem(new FileHandler());
 		runUserAccountMenu(loginUser(system));
 	}
 	
