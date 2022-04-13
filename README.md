@@ -1,5 +1,9 @@
 # project-credit-card-management
 
+By: Andrew Yoo, David Wrenner, and DeBose Tuller
+
+##2nd Iteration
+
 A banking management system that runs in the command line.
 
 Run the bash script provided in the command line to compile and run the java code:
