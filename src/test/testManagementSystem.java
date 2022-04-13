@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import classes.Account;
 import classes.ManagementSystem;
 import classes.CommandLineApp;
+import classes.FileHandler;
 
 
 class testManagementSystem {
@@ -18,7 +19,7 @@ class testManagementSystem {
 	@BeforeEach
 	void setup() {
 		emptySystem = new ManagementSystem();
-		existingSystem = new ManagementSystem("test.txt", "debitCards.txt", "creditCards.txt");
+		existingSystem = new ManagementSystem(new FileHandler());
 	}
 
 	@Test

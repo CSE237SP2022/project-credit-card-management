@@ -15,16 +15,13 @@ public class ManagementSystem {
 		this.numAccounts = 0;
 	}
 
-	public ManagementSystem(String accountsFileName, String debitCardsFileName, String creditCardsFileName) {
+	public ManagementSystem(FileHandler fileHandler) {
 		this.accounts = new ArrayList<Account>();
 		this.numAccounts = 0;
 		
-		String accountsFilePath = "systemFiles/"+accountsFileName;
-		String debitCardsFilePath = "systemFiles/"+debitCardsFileName;
-		String creditCardsFilePath = "systemFiles/"+creditCardsFileName;
-		File accountsFile = new File(accountsFilePath);
-		File debitCardsFile = new File(debitCardsFilePath);
-		File creditCardsFile = new File(creditCardsFilePath);
+		File accountsFile = fileHandler.getAccountsFile();
+		File debitCardsFile = fileHandler.getCreditCardsFile();
+		File creditCardsFile = fileHandler.getDebitCardsFile();
 		
 		try {
 			Scanner fileScanner = new Scanner(accountsFile);
