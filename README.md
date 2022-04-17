@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # project-credit-card-management
 
 By: Andrew Yoo, David Wrenner, and DeBose Tuller
@@ -39,4 +38,3 @@ purposes, but the mecnanism for storing new users and user information has not b
 - Create text files that store the user's information whenever a user is created
 - Create Transactions whenever a user spends money with their credit and debit card
 - Store Transactions for users in a file.
->>>>>>> 278c4b5953f209accb818eef5bdd5479c08bae52
