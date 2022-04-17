@@ -1,4 +1,17 @@
+<<<<<<< HEAD
 # project-credit-card-management
+
+By: Andrew Yoo, David Wrenner, and DeBose Tuller
+
+## Second Iteration
+
+### How to run the program
+Run the bash script provided in the command line to compile and run the java code:
+$ bash run.sh
+
+When prompted to enter a username and password, enter the following:
+- Enter your username: dwusername
+- Enter your password: dwpassword
 
 A banking management system that runs in the command line.
 
@@ -8,11 +21,22 @@ $ bash run.sh
 Currently, the user can only view the details of a dummy account that is pre-loaded into the system.
   -Username: dwusername
   -Password: dwpassword
- 
-For Iteration I, the user should be able to log in to an account using the credentials provided above. Once logged in, the user will have the option to see all the card owned by that user. The user will also have the option to create a new debit or credit card. This will generate a unique card number. Once a card is generated, the user can access the card by tying in an already existing card number. For debit cards, users can deposit and withdraw. For credit cards, users can spend and pay the balance according to a set credit limit.
+  
+### Tasks Completed For This Iteration
 
-Andrew worked on the Card, Debit Card, and Credit Card class heirarchy.
-David added file storage and user login.
-DuBose made the Transaction class and base for the Management System.
- 
-For the next iteration, we would like to add support for executing and storing a Transaction log, additional debit and credit cards features, and changing user profile information. The user interface will also need to be updated to reflect the new functions we will be adding to our card management project. 
+- The card management system can read in credit/debit card information from a file and create corresponding card objects.
+- The different user account features (username, password, and income) can be changed.
+
+### Tasks In Progress That Do Not Fully Work
+
+- Currently, it is not possible for the user to create new accounts. There is already one account created for testing
+purposes, but the mecnanism for storing new users and user information has not been implemented.
+- We are also in the process of writing code that will write to the card text files whenever new cards are created.
+
+### Tasks Left To Do
+
+- Make the ability to create users.
+- Create text files that store the user's information whenever a user is created
+- Create Transactions whenever a user spends money with their credit and debit card
+- Store Transactions for users in a file.
+>>>>>>> 278c4b5953f209accb818eef5bdd5479c08bae52

@@ -1,10 +1,13 @@
 package classes;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;  
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Card{
 	
@@ -13,6 +16,7 @@ public class Card{
 	private String CVV;
 	private String expDate;
 	private int pin;
+	private boolean isCreditCard;
 	
 	public Card(String name, int pin)
 	{
@@ -22,7 +26,17 @@ public class Card{
 		this.cardNumber = generateCardNumber();
 		this.CVV = generateCVV();
 		this.expDate = generateExpDate();
+		this.setIsCreditCard(false);
 	}	
+	
+	public Card(String name, int pin, String cardNumber, String CVV, String expDate) {
+		this.name = name;
+		this.pin = pin;
+		this.cardNumber = cardNumber;
+		this.CVV = CVV;
+		this.expDate = expDate;
+	}
+	
 	
 	public String generateCardNumber()
 	{
@@ -97,6 +111,14 @@ public class Card{
 	public String getExpDate() 
 	{
 		return this.expDate;
+	}
+	
+	public boolean isCreditCard() {
+		return this.isCreditCard;
+	}
+
+	public void setIsCreditCard(boolean isCreditCard) {
+		this.isCreditCard = isCreditCard;
 	}
 }
 
