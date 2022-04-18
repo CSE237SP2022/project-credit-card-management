@@ -18,6 +18,8 @@ public class CreditCard extends Card
 	public CreditCard(String username, int pin, String cardNumber, String CVV, String expDate, Double limit) {
 		super(username, pin, cardNumber, CVV, expDate);
 		this.creditLimit = limit;
+		this.availableBalance = this.creditLimit;
+		this.currentBalance = 0; 
 		this.setIsCreditCard(true);
 	}
 

@@ -31,9 +31,9 @@ class testManagementSystem {
 	
 	@Test
 	void testNumAccountsWithExistingAccount() {
-		Account dummyAccountOne = emptySystem.createAccount("","","","",1);
+		Account dummyAccountOne = emptySystem.createAccountFile("","","","",1);
 		int numAccountsBefore = emptySystem.getNumAccounts();
-		Account dummyAccountTwo = emptySystem.createAccount("","","","",2);
+		Account dummyAccountTwo = emptySystem.createAccountFile("","","","",2);
 		
 		int numAccountsAfter = emptySystem.getNumAccounts();
 		
@@ -48,7 +48,7 @@ class testManagementSystem {
 	
 	@Test
 	void testloginUserValidCredentials() {
-		Account dummyAccount = emptySystem.createAccount("a", "b", "", "", 0);
+		Account dummyAccount = emptySystem.createAccountFile("a", "b", "", "", 0);
 		Account returnedAccount = emptySystem.verifyUserCredentials("a", "b");
 		
 		assertTrue(returnedAccount != null);

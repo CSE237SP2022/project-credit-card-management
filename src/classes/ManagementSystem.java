@@ -29,8 +29,8 @@ public class ManagementSystem {
 		this.numAccounts = 0;
 		
 		this.accountsFile = fileHandler.getAccountsFile();
-		this.debitCardsFile = fileHandler.getCreditCardsFile();
-		this.creditCardsFile = fileHandler.getDebitCardsFile();
+		this.debitCardsFile = fileHandler.getDebitCardsFile();
+		this.creditCardsFile = fileHandler.getCreditCardsFile();
 		
 		try {
 			Scanner fileScanner = new Scanner(accountsFile);
@@ -39,6 +39,7 @@ public class ManagementSystem {
 			
 			fileScanner = new Scanner(debitCardsFile);
 			createCardsFromFile(fileScanner);
+			fileScanner.close();
 			
 			fileScanner = new Scanner(creditCardsFile);
 			createCardsFromFile(fileScanner);
