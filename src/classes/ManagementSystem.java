@@ -1,14 +1,23 @@
 package classes;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class ManagementSystem {
 	
 	private ArrayList<Account> accounts;
 	private int numAccounts;
+	
+	private File accountsFile;
+	private File debitCardsFile;
+	private File creditCardsFile;
 	
 	public ManagementSystem() {
 		this.accounts = new ArrayList<Account>();
@@ -19,9 +28,9 @@ public class ManagementSystem {
 		this.accounts = new ArrayList<Account>();
 		this.numAccounts = 0;
 		
-		File accountsFile = fileHandler.getAccountsFile();
-		File debitCardsFile = fileHandler.getCreditCardsFile();
-		File creditCardsFile = fileHandler.getDebitCardsFile();
+		this.accountsFile = fileHandler.getAccountsFile();
+		this.debitCardsFile = fileHandler.getCreditCardsFile();
+		this.creditCardsFile = fileHandler.getDebitCardsFile();
 		
 		try {
 			Scanner fileScanner = new Scanner(accountsFile);
@@ -40,12 +49,47 @@ public class ManagementSystem {
 		}
 
 	}
+	
+	public ArrayList<String> getAllUsernames(){
+		ArrayList<String> allUsernames = new ArrayList<String>();
+		
+		for (int i = 0 ; i < accounts.size(); i++)
+		{
+			allUsernames.add(accounts.get(i).getUsername());
+		}
+		
+		return allUsernames;
+	}
 
-	public Account createAccount(String username, String password, String legalName, String streetAddress, int grossIncome) {
+	public Account createAccountFile(String username, String password, String legalName, String streetAddress, int grossIncome) {
 		Account account = new Account(username, password, legalName, streetAddress, grossIncome);
 		accounts.add(account);
 		this.numAccounts++;
 		return account;
+	}
+	
+	public Account createAccount(String username, String password, String legalName, String streetAddress, int grossIncome)
+	{
+		Account account = new Account(username, password, legalName, streetAddress, grossIncome);
+		accounts.add(account);
+		addAccountToFile(account);
+		this.numAccounts++;
+		return account;
+	}
+	
+	public void addAccountToFile(Account account){
+		try {
+			Writer output;
+			output = new BufferedWriter(new FileWriter(this.accountsFile, true));
+			String accountToAdd = account.getUsername()+";"+account.getPassword()+";"+account.getName()+";"+account.getAddress()+";"+account.getIncome();
+			output.append("\n");
+			output.append(accountToAdd);
+			output.close();
+		}
+		
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void createAccountsFromFile(Scanner fileScanner) {
@@ -58,7 +102,7 @@ public class ManagementSystem {
 					String legalName = accountInformation[2].replace(";", "");
 					String streetAddress = accountInformation[3].replace(";", "");
 					int grossIncome = Integer.parseInt(accountInformation[4]);
-					Account account = this.createAccount(username, password, legalName, streetAddress, grossIncome);
+					Account account = this.createAccountFile(username, password, legalName, streetAddress, grossIncome);
 			}
 		}
 	}
@@ -85,7 +129,6 @@ public class ManagementSystem {
 			 }
 			 
 			 this.addCardToAccount(username, card);
-
 		}
 	}
 	

@@ -1,17 +1,19 @@
 package classes;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CommandLineApp {
 	
 	public static void main(String[] args) {
 		ManagementSystem system = new ManagementSystem(new FileHandler());
-		runUserAccountMenu(loginUser(system));
+		displayFirstPage(system);
 	}
 	
 	private static void runUserAccountMenu(Account userAccount) {
 		if(userAccount == null) return;
 		String userInput = "";
+		
 		promptUserMenuOptions();
 		userInput = getUserInfoString();
 		while(!userInput.equals("QUIT")) {
@@ -144,13 +146,91 @@ public class CommandLineApp {
 		}
 	}
 	
+	public static Account createUser(ManagementSystem system) {
+		String name = "";
+		String address = "";
+		String income = "";
+		String username = "";
+		String password = "";
+		
+		String reEnterUsername = "";
+		String reEnterPassword = "";
+		
+		while(name.equals("")) {
+			System.out.print("Enter your name: ");
+			name = getUserInfoString();
+		}
+		
+		while(address.equals("")) {
+			System.out.print("Enter your address: ");
+			address = getUserInfoString();
+		}
+		
+		while(income.equals("")) {
+			System.out.print("Enter your yearly income: ");
+			income = getUserInfoString();
+			
+			try {
+				int intValue = Integer.parseInt(income);
+			} 
+			catch (NumberFormatException e) {
+				income="";
+			    System.out.println("You did not enter a valid yearly income");
+			    System.out.println();
+			}
+			
+		}
+		
+		while(username.equals("")) {
+			System.out.print("Create new username: ");
+			username = getUserInfoString();
+			
+			ArrayList<String> allUsernames = system.getAllUsernames();
+			for (int i = 0 ; i < allUsernames.size(); i++)
+			{
+				if (username.equals(allUsernames.get(i)))
+				{
+					username="";
+				    System.out.println("Username has been taken");
+				    System.out.println();
+				}
+			}
+		}
+		
+		while(password.equals("")) {
+			System.out.print("Create new password: ");
+			password = getUserInfoString();
+		}	
+		
+		System.out.print("Re-Enter your username: ");
+		reEnterUsername = getUserInfoString();
+		
+		System.out.print("Re-Enter your password: ");
+		reEnterPassword = getUserInfoString();
+		
+		if (!username.equals(reEnterUsername) || !password.equals(reEnterPassword))
+		{
+			System.out.println("You did not type in the correct username or password");
+			displayFirstPage(system);
+			return null;
+		}
+		
+		else {
+			int incomeInt = Integer.parseInt(income);  
+			System.out.println("Account Successfully Created");
+			return system.createAccount(username, password, name, address, incomeInt);
+		}	
+	}
+	
 	public static Account loginUser(ManagementSystem system) {
 		String username = "";
 		String password = "";
+
 		while(username.equals("")) {
 			promptUserForUsername();
 			username = getUserInfoString();
 		}
+		
 		while(password.equals("")) {
 			promptUserForPassword();
 			password = getUserInfoString();
@@ -163,6 +243,50 @@ public class CommandLineApp {
 		Scanner scanner = new Scanner(System.in);
 		String infoString = scanner.nextLine();
 		return infoString;
+	}
+	
+	private static void displayFirstPage(ManagementSystem system) {
+		promptUserStartPage();
+		String userInput = "";
+		userInput = getUserInfoString();
+		
+		boolean validStartPageEntry = false;
+		
+		if (userInput.equals("0") || userInput.equals("1")) {
+			validStartPageEntry =true; 
+			firstPageSelectionProcess(userInput, system);
+		}
+		
+		else {
+			while(!validStartPageEntry) {
+				firstPageSelectionProcess(userInput, system);
+				
+				promptUserStartPage();
+				userInput = getUserInfoString();
+				
+				if (userInput.equals("0") || userInput.equals("1")) {
+					validStartPageEntry =true; 
+					firstPageSelectionProcess(userInput, system);
+				}
+			}
+		}
+		
+	}
+	
+	private static void firstPageSelectionProcess(String userInput, ManagementSystem system) {
+		try{
+			int choice = Integer.parseInt(userInput);
+			if(choice == 0) {
+				runUserAccountMenu(loginUser(system));
+			}
+			else if(choice == 1) {
+				createUser(system);
+				displayFirstPage(system);
+			}
+		}
+		catch(NumberFormatException e) {
+			System.out.println("Pick a valid menu option!");
+		}
 	}
 
 	private static void promptUserMenuOptions() {
@@ -195,6 +319,15 @@ public class CommandLineApp {
 		System.out.println("1 - spend credit card");
 		System.out.println("2 - pay credit card balance");
 		System.out.println("QUIT - exit this menu");
+		System.out.print(">>> ");
+	}
+	
+	public static void promptUserStartPage() {
+		System.out.println();
+		System.out.println("Welcome to the Card Management Service!");
+		System.out.println("Enter Option Number and Hit Enter:");
+		System.out.println("0 - login existing account");
+		System.out.println("1 - create new account");
 		System.out.print(">>> ");
 	}
 	

@@ -29,12 +29,26 @@ public class Account {
 		this.creditCards = new ArrayList<>();
 	}
 
-
 	public String getUsername() {
 		return this.username;
 	}
-
-
+	
+	public String getPassword() {
+		return this.password;
+	}
+	
+	public String getName() {
+		return this.legalName;
+	}
+	
+	public String getAddress() {
+		return this.streetAddress;
+	}
+	
+	public String getIncome() {
+		return Integer.toString((int)this.grossIncome);
+	}
+	
 	public int getHashedPassword() {
 		return this.password.hashCode();
 	}
