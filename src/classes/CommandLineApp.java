@@ -7,10 +7,11 @@ public class CommandLineApp {
 	
 	public static void main(String[] args) {
 		ManagementSystem system = new ManagementSystem(new FileHandler());
-		displayFirstPage(system);
+		CommandLineApp app = new CommandLineApp();
+		app.displayFirstPage(system);
 	}
 	
-	private static void runUserAccountMenu(Account userAccount) {
+	private void runUserAccountMenu(Account userAccount) {
 		if(userAccount == null) return;
 		String userInput = "";
 		
@@ -53,7 +54,7 @@ public class CommandLineApp {
 		}
 	}
 	
-	public static void accessDebitCard(Account userAccount)
+	public void accessDebitCard(Account userAccount)
 	{
 		System.out.println("Enter Debit Card Number: ");
 		String cardNumberString = getUserInfoString();
@@ -99,7 +100,7 @@ public class CommandLineApp {
 		}
 	}
 	
-	public static void accessCreditCard(Account userAccount)
+	public void accessCreditCard(Account userAccount)
 	{
 		System.out.println("Enter Credit Card Number: ");
 		String cardNumberString = getUserInfoString();
@@ -146,7 +147,7 @@ public class CommandLineApp {
 		}
 	}
 	
-	public static Account createUser(ManagementSystem system) {
+	public Account createUser(ManagementSystem system) {
 		String name = "";
 		String address = "";
 		String income = "";
@@ -222,7 +223,7 @@ public class CommandLineApp {
 		}	
 	}
 	
-	public static Account loginUser(ManagementSystem system) {
+	public Account loginUser(ManagementSystem system) {
 		String username = "";
 		String password = "";
 
@@ -239,13 +240,13 @@ public class CommandLineApp {
 		return system.verifyUserCredentials(username, password);
 	}
 	
-	public static String getUserInfoString() {
+	public String getUserInfoString() {
 		Scanner scanner = new Scanner(System.in);
 		String infoString = scanner.nextLine();
 		return infoString;
 	}
 	
-	private static void displayFirstPage(ManagementSystem system) {
+	private void displayFirstPage(ManagementSystem system) {
 		promptUserStartPage();
 		String userInput = "";
 		userInput = getUserInfoString();
@@ -273,7 +274,7 @@ public class CommandLineApp {
 		
 	}
 	
-	private static void firstPageSelectionProcess(String userInput, ManagementSystem system) {
+	private void firstPageSelectionProcess(String userInput, ManagementSystem system) {
 		try{
 			int choice = Integer.parseInt(userInput);
 			if(choice == 0) {
@@ -289,7 +290,7 @@ public class CommandLineApp {
 		}
 	}
 
-	private static void promptUserMenuOptions() {
+	private void promptUserMenuOptions() {
 		System.out.println();
 		System.out.println("Options:");
 		System.out.println("0 - view account details");
@@ -302,7 +303,7 @@ public class CommandLineApp {
 		System.out.print(">>> ");
 	}
 	
-	private static void promptDebitCardOptions() {
+	private void promptDebitCardOptions() {
 		System.out.println();
 		System.out.println("Options:");
 		System.out.println("0 - view debit card details");
@@ -312,7 +313,7 @@ public class CommandLineApp {
 		System.out.print(">>> ");
 	}
 
-	private static void promptCreditCardOptions() {
+	private void promptCreditCardOptions() {
 		System.out.println();
 		System.out.println("Options:");
 		System.out.println("0 - view credit card details");
@@ -322,7 +323,7 @@ public class CommandLineApp {
 		System.out.print(">>> ");
 	}
 	
-	public static void promptUserStartPage() {
+	public void promptUserStartPage() {
 		System.out.println();
 		System.out.println("Welcome to the Card Management Service!");
 		System.out.println("Enter Option Number and Hit Enter:");
@@ -331,11 +332,11 @@ public class CommandLineApp {
 		System.out.print(">>> ");
 	}
 	
-	public static void promptUserForUsername() {
+	public void promptUserForUsername() {
 		System.out.print("Enter your username: ");
 	}
 	
-	public static void promptUserForPassword() {
+	public void promptUserForPassword() {
 		System.out.print("Enter your password: ");
 	}
 
