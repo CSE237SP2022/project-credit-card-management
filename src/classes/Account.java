@@ -14,7 +14,6 @@ public class Account {
 	private String legalName;
 	private String streetAddress;
 	private double grossIncome;
-	//private ArrayList<Card> cards;
 	private ArrayList<DebitCard> debitCards;
 	private ArrayList<CreditCard> creditCards;
 	

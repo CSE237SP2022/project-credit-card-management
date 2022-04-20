@@ -24,26 +24,12 @@ public class DebitCard extends Card
 	{
 		String depositString = Double.toString(depositAmount);
 		String depositValueList[] = depositString.split("\\.");
-		
-		if (depositValueList.length > 1)
-		{
-			String cents = depositValueList[1];
-			
-			if (cents.length() > 2)
-			{
-				System.out.println("Deposit a valid amount");
-				return;
-			}
-			
-			else
-			{
-				this.balance += depositAmount;
-			}
-		}
-		
-		else if (depositValueList.length == 1)
-		{
+	
+		if (validateAmount(depositValueList)) {
 			this.balance += depositAmount;
+		} else {
+			System.out.println("Deposit a valid amount");
+			return;
 		}
 	}
 	
@@ -52,25 +38,20 @@ public class DebitCard extends Card
 		String withdrawString = Double.toString(withdrawAmount);
 		String withdrawValueList[] = withdrawString.split("\\.");
 		
-		if (withdrawValueList.length > 1)
-		{
-			String cents = withdrawValueList[1];
-			
-			if (cents.length() > 2)
-			{
-				System.out.println("Withdraw a valid amount");
-				return;
-			}
-			
-			else
-			{
-				this.balance -= withdrawAmount;
-			}
+		if (validateAmount(withdrawValueList)) {
+			this.balance -= withdrawAmount;
+		} else {
+			System.out.println("Withdraw a valid amount");
+			return;
+		}
+
+	}
+	
+	private boolean validateAmount(String[] amount) {
+		if (amount.length > 1 && amount[1].length() > 2) {
+			return false;
 		}
 		
-		else if (withdrawValueList.length == 1)
-		{
-			this.balance -= withdrawAmount;
-		}
+		return true;
 	}
 }
