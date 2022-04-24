@@ -38,77 +38,48 @@ public class CreditCard extends Card
 		return this.creditLimit;
 	}
 	
-	public void spend(double amountSpent)
-	{
-		if (this.availableBalance >= amountSpent)
-		{
+	public void spend(double amountSpent) {
+		if (this.availableBalance >= amountSpent) {
 			String amountSpentString = Double.toString(amountSpent);
 			String amountSpentValueList[] = amountSpentString.split("\\.");
 			
-			if (amountSpentValueList.length > 1)
-			{
-				String cents = amountSpentValueList[1];
-				
-				if (cents.length() > 2)
-				{
-					System.out.println("Spend a valid amount");
-					return;
-				}
-				
-				else
-				{
-					this.availableBalance -= amountSpent;
-					this.currentBalance += amountSpent;
-				}
-			}
-			
-			else if (amountSpentValueList.length == 1)
-			{
+			if (validateAmount(amountSpentValueList)) {
 				this.availableBalance -= amountSpent;
 				this.currentBalance += amountSpent;
+			} else {
+				System.out.println("Spend a valid amount");
+				return;
 			}
-		}
 		
-		else
-		{
+		} else {
 			System.out.println("Insufficient Funds");
 			return;
 		}
 	}
 	
-	public void payBill(double amountPayed)
-	{
-		if (this.currentBalance >= amountPayed)
-		{
+	private boolean validateAmount(String[] amount) {
+		if (amount.length > 1 && amount[1].length() > 2) {
+			return false;
+		} 
+		
+		return true;
+	}
+	
+	public void payBill(double amountPayed) {
+		if (this.currentBalance >= amountPayed) {
 			String amountPayedString = Double.toString(amountPayed);
 			String amountPayedValueList[] = amountPayedString.split("\\.");
 			
-			if (amountPayedValueList.length > 1)
-			{
-				String cents = amountPayedValueList[1];
-				
-				if (cents.length() > 2)
-				{
-					System.out.println("Pay a valid amount");
-					return;
-				}
-				
-				else
-				{
-					this.availableBalance += amountPayed;
-					this.currentBalance -= amountPayed;
-				}
-			}
-			
-			else if (amountPayedValueList.length == 1)
-			{
+			if (validateAmount(amountPayedValueList)) {
 				this.availableBalance += amountPayed;
 				this.currentBalance -= amountPayed;
+			} else {
+				System.out.println("Pay a valid amount");
+				return;
 			}
-		}
+			
 		
-		else
-		{
+		} else {
 			System.out.println("Payment excedes balance");
 			return;
 		}
