@@ -14,36 +14,12 @@ public class CommandLineApp {
 	private void runUserAccountMenu(Account userAccount) {
 		if(userAccount == null) return;
 		String userInput = "";
-		
 		promptUserMenuOptions();
 		userInput = getUserInfoString();
 		while(!userInput.equals("QUIT")) {
 			try{
 				int choice = Integer.parseInt(userInput);
-				if(choice == 0) {
-					System.out.println(userAccount.toString());
-				}
-				else if(choice == 1) {
-					userAccount.makeDebitCard();
-					
-				}
-				
-				else if(choice == 2) {
-					userAccount.makeCreditCard();
-				}
-				
-				else if(choice == 3) {
-					accessDebitCard(userAccount);
-				}
-				
-				else if(choice == 4) {
-					accessCreditCard(userAccount);
-				}
-				
-				else if (choice == 5) {
-					userAccount.editAccountDetail();
-				}
-				
+				userAccountMenu(userAccount, choice);
 			}
 			catch(NumberFormatException e) {
 				System.out.println("Pick a valid menu option!");
@@ -54,49 +30,56 @@ public class CommandLineApp {
 		}
 	}
 	
+	public void userAccountMenu(Account userAccount, int choice) {
+		switch(choice) {
+			case 0: System.out.println(userAccount.toString()); break;
+			case 1: userAccount.makeDebitCard(); break;
+			case 2: userAccount.makeCreditCard(); break;
+			case 3: accessDebitCard(userAccount); break;
+			case 4: accessCreditCard(userAccount); break;
+			case 5: userAccount.editAccountDetail(); break;
+		}
+	}
+	
 	public void accessDebitCard(Account userAccount)
 	{
 		System.out.println("Enter Debit Card Number: ");
 		String cardNumberString = getUserInfoString();
-		DebitCard retriveDebitCard = userAccount.containsDebitCard(cardNumberString);
-		if (retriveDebitCard!=null)
+		DebitCard retrievedDebitCard = userAccount.containsDebitCard(cardNumberString);
+		if (retrievedDebitCard == null) return;
+		
+		System.out.println("Accessed Debit Card");
+		String userInput = "";
+		promptDebitCardOptions();
+		userInput = getUserInfoString();
+		
+		while(!userInput.equals("QUIT")) 
 		{
-			System.out.println("Accessed Debit Card");
-			String userInput = "";
+			try
+			{
+				int choice = Integer.parseInt(userInput);
+				accessDebitCardMenu(retrievedDebitCard, choice);
+			}
+			catch(NumberFormatException e) 
+			{
+				System.out.println("Pick a valid menu option!");
+			}
 			promptDebitCardOptions();
 			userInput = getUserInfoString();
-			
-			while(!userInput.equals("QUIT")) 
-			{
-				try
-				{
-					int choice = Integer.parseInt(userInput);
-					if(choice == 0) 
-					{
-						System.out.println("Card number = " + retriveDebitCard.getCardNumber());
-						System.out.println("Balance = " + retriveDebitCard.getBalance());
-					}
-					else if(choice == 1) 
-					{
-						System.out.println("Enter deposit amount: ");
-						String depositAmount = getUserInfoString();
-						retriveDebitCard.deposit(Double.valueOf(depositAmount));
-					}
-					
-					else if(choice == 2) 
-					{
-						System.out.println("Enter withdraw amount: ");
-						String withdrawAmount = getUserInfoString();
-						retriveDebitCard.withdraw(Double.valueOf(withdrawAmount));
-					}
-				}
-				catch(NumberFormatException e) 
-				{
-					System.out.println("Pick a valid menu option!");
-				}
-				promptDebitCardOptions();
-				userInput = getUserInfoString();
-			}
+		}
+		
+	}
+	
+	public void accessDebitCardMenu(DebitCard card, int choice) {
+		switch(choice) {
+			case 0: System.out.println("Card number = " + card.getCardNumber());
+					System.out.println("Balance = " + card.getBalance()); break;
+			case 1: System.out.println("Enter deposit amount: ");
+					String depositAmount = getUserInfoString();
+					card.deposit(Double.valueOf(depositAmount)); break;
+			case 2: System.out.println("Enter withdraw amount: ");
+					String withdrawAmount = getUserInfoString();
+					card.withdraw(Double.valueOf(withdrawAmount)); break;
 		}
 	}
 	
@@ -104,46 +87,41 @@ public class CommandLineApp {
 	{
 		System.out.println("Enter Credit Card Number: ");
 		String cardNumberString = getUserInfoString();
-		CreditCard retriveCreditCard = userAccount.containsCreditCard(cardNumberString);
-		if (retriveCreditCard!=null)
+		CreditCard retrievedCreditCard = userAccount.containsCreditCard(cardNumberString);
+		if (retrievedCreditCard == null) return;
+		
+		System.out.println("Accessed Credit Card");
+		String userInput = "";
+		promptCreditCardOptions();
+		userInput = getUserInfoString();
+		
+		while(!userInput.equals("QUIT")) 
 		{
-			System.out.println("Accessed Credit Card");
-			String userInput = "";
+			try
+			{
+				int choice = Integer.parseInt(userInput);
+				accessCreditCardMenu(retrievedCreditCard, choice);
+			}
+			catch(NumberFormatException e) 
+			{
+				System.out.println("Pick a valid menu option!");
+			}
 			promptCreditCardOptions();
 			userInput = getUserInfoString();
-			
-			while(!userInput.equals("QUIT")) 
-			{
-				try
-				{
-					int choice = Integer.parseInt(userInput);
-					if(choice == 0) 
-					{
-						System.out.println("Card number = " + retriveCreditCard.getCardNumber());
-						System.out.println("Available Balance = " + retriveCreditCard.getAvailableBalance());
-						System.out.println("Current Balance = " + retriveCreditCard.getCurrentBalance());
-					}
-					else if(choice == 1) 
-					{
-						System.out.println("Amount to spend: ");
-						String spendAmount = getUserInfoString();
-						retriveCreditCard.spend(Double.valueOf(spendAmount));
-					}
-					
-					else if(choice == 2) 
-					{
-						System.out.println("Amount to pay balance: ");
-						String payAmount = getUserInfoString();
-						retriveCreditCard.payBill(Double.valueOf(payAmount));
-					}
-				}
-				catch(NumberFormatException e) 
-				{
-					System.out.println("Pick a valid menu option!");
-				}
-				promptCreditCardOptions();
-				userInput = getUserInfoString();
-			}
+		}
+	}
+	
+	public void accessCreditCardMenu(CreditCard card, int choice) {
+		switch(choice) {
+		case 0: System.out.println("Card number = " + card.getCardNumber());
+				System.out.println("Available Balance = " + card.getAvailableBalance());
+				System.out.println("Current Balance = " + card.getCurrentBalance()); break;
+		case 1: System.out.println("Amount to spend: ");
+				String spendAmount = getUserInfoString();
+				card.spend(Double.valueOf(spendAmount)); break;
+		case 2: System.out.println("Amount to pay balance: ");
+				String payAmount = getUserInfoString();
+				card.payBill(Double.valueOf(payAmount)); break;
 		}
 	}
 	
