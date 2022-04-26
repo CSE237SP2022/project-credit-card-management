@@ -4,8 +4,7 @@ public class DebitCard extends Card
 {
 	private double balance;
 	
-	public DebitCard(String name, int pin)
-	{
+	public DebitCard(String name, int pin){
 		super(name, pin);
 		this.balance = 0;
 		this.setIsCreditCard(false);
@@ -15,8 +14,7 @@ public class DebitCard extends Card
 		super(name, pin, cardNumber, CVV, expDate);
 	}
 	
-	public double getBalance()
-	{
+	public double getBalance(){
 		return this.balance;
 	}
 	

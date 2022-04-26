@@ -41,8 +41,7 @@ public class CommandLineApp {
 		}
 	}
 	
-	public void accessDebitCard(Account userAccount)
-	{
+	public void accessDebitCard(Account userAccount){
 		System.out.println("Enter Debit Card Number: ");
 		String cardNumberString = getUserInfoString();
 		DebitCard retrievedDebitCard = userAccount.containsDebitCard(cardNumberString);
@@ -53,21 +52,16 @@ public class CommandLineApp {
 		promptDebitCardOptions();
 		userInput = getUserInfoString();
 		
-		while(!userInput.equals("QUIT")) 
-		{
-			try
-			{
+		while(!userInput.equals("QUIT")) {
+			try{
 				int choice = Integer.parseInt(userInput);
 				accessDebitCardMenu(retrievedDebitCard, choice);
-			}
-			catch(NumberFormatException e) 
-			{
+			}catch(NumberFormatException e) {
 				System.out.println("Pick a valid menu option!");
 			}
 			promptDebitCardOptions();
 			userInput = getUserInfoString();
 		}
-		
 	}
 	
 	public void accessDebitCardMenu(DebitCard card, int choice) {
@@ -95,15 +89,11 @@ public class CommandLineApp {
 		promptCreditCardOptions();
 		userInput = getUserInfoString();
 		
-		while(!userInput.equals("QUIT")) 
-		{
-			try
-			{
+		while(!userInput.equals("QUIT")) {
+			try{
 				int choice = Integer.parseInt(userInput);
 				accessCreditCardMenu(retrievedCreditCard, choice);
-			}
-			catch(NumberFormatException e) 
-			{
+			}catch(NumberFormatException e) {
 				System.out.println("Pick a valid menu option!");
 			}
 			promptCreditCardOptions();
@@ -125,26 +115,26 @@ public class CommandLineApp {
 		}
 	}
 	
-	public Account createUser(ManagementSystem system) {
+	public String askNewUserName() {
 		String name = "";
-		String address = "";
-		String income = "";
-		String username = "";
-		String password = "";
-		
-		String reEnterUsername = "";
-		String reEnterPassword = "";
-		
 		while(name.equals("")) {
 			System.out.print("Enter your name: ");
 			name = getUserInfoString();
 		}
-		
+		return name;
+	}
+	
+	public String askNewAddress() {
+		String address = "";
 		while(address.equals("")) {
 			System.out.print("Enter your address: ");
 			address = getUserInfoString();
 		}
-		
+		return address;
+	}
+	
+	public String askNewIncome() {
+		String income = "";
 		while(income.equals("")) {
 			System.out.print("Enter your yearly income: ");
 			income = getUserInfoString();
@@ -156,10 +146,13 @@ public class CommandLineApp {
 				income="";
 			    System.out.println("You did not enter a valid yearly income");
 			    System.out.println();
-			}
-			
+			}	
 		}
-		
+		return income;
+	}
+	
+	public String askNewUsername(ManagementSystem system) {
+		String username = "";
 		while(username.equals("")) {
 			System.out.print("Create new username: ");
 			username = getUserInfoString();
@@ -175,25 +168,35 @@ public class CommandLineApp {
 				}
 			}
 		}
-		
+		return username;
+	}
+	
+	public String askNewPassword() {
+		String password = "";
 		while(password.equals("")) {
 			System.out.print("Create new password: ");
 			password = getUserInfoString();
 		}	
+		return password;
+	}
+	
+	public Account createUser(ManagementSystem system) {
+		String name = askNewUserName();
+		String address = askNewAddress();
+		String income = askNewIncome();
+		String username = askNewUsername(system);
+		String password = askNewPassword();
 		
 		System.out.print("Re-Enter your username: ");
-		reEnterUsername = getUserInfoString();
-		
+		String reEnterUsername = getUserInfoString();
 		System.out.print("Re-Enter your password: ");
-		reEnterPassword = getUserInfoString();
+		String reEnterPassword = getUserInfoString();
 		
-		if (!username.equals(reEnterUsername) || !password.equals(reEnterPassword))
-		{
+		if (!username.equals(reEnterUsername) || !password.equals(reEnterPassword)){
 			System.out.println("You did not type in the correct username or password");
 			displayFirstPage(system);
 			return null;
 		}
-		
 		else {
 			int incomeInt = Integer.parseInt(income);  
 			System.out.println("Account Successfully Created");
@@ -228,14 +231,12 @@ public class CommandLineApp {
 		promptUserStartPage();
 		String userInput = "";
 		userInput = getUserInfoString();
-		
 		boolean validStartPageEntry = false;
 		
 		if (userInput.equals("0") || userInput.equals("1")) {
 			validStartPageEntry =true; 
 			firstPageSelectionProcess(userInput, system);
 		}
-		
 		else {
 			while(!validStartPageEntry) {
 				firstPageSelectionProcess(userInput, system);
@@ -249,7 +250,6 @@ public class CommandLineApp {
 				}
 			}
 		}
-		
 	}
 	
 	private void firstPageSelectionProcess(String userInput, ManagementSystem system) {

@@ -10,7 +10,6 @@ public class FileHandler {
 	final String creditCardsFile = "creditCards.txt";
 	
 	public FileHandler() {
-		
 	}
 	
 	public File getAccountsFile() {
