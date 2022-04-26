@@ -2,39 +2,34 @@
 
 By: Andrew Yoo, David Wrenner, and DeBose Tuller
 
-## Second Iteration
+## Iteration 3
 
 ### How to run the program
-Run the bash script provided in the command line to compile and run the java code:
-$ bash run.sh
 
-When prompted to enter a username and password, enter the following:
-- Enter your username: dwusername
-- Enter your password: dwpassword
-
-A banking management system that runs in the command line.
+cd into the repository containing the cloned project and enter: 
+```git pull```
 
 Run the bash script provided in the command line to compile and run the java code:
-$ bash run.sh
+```bash run.sh```
 
-Currently, the user can only view the details of a dummy account that is pre-loaded into the system.
-  -Username: dwusername
-  -Password: dwpassword
+When you reach the start screen, make a new account by entering 1 and pressing enter.
+
+Create a new user account by entering in the requested information. Remember the username
+and password for this new account. Once the new account has been created, enter 0 and 
+type in the username and password for the account you just created. 
   
 ### Tasks Completed For This Iteration
 
-- The card management system can read in credit/debit card information from a file and create corresponding card objects.
-- The different user account features (username, password, and income) can be changed.
+- Users can create a new account. Accounts are stored on a seperate file so if the user logs out 
+of the program and logs in, they can log into the account previousely created. 
+- The correct card information for both debit card and credit card are returned to the user when
+card information is requested. 
 
 ### Tasks In Progress That Do Not Fully Work
 
-- Currently, it is not possible for the user to create new accounts. There is already one account created for testing
-purposes, but the mecnanism for storing new users and user information has not been implemented.
-- We are also in the process of writing code that will write to the card text files whenever new cards are created.
-
-### Tasks Left To Do
-
-- Make the ability to create users.
-- Create text files that store the user's information whenever a user is created
-- Create Transactions whenever a user spends money with their credit and debit card
-- Store Transactions for users in a file.
+- There were some functionality for this project that were planned out, but were not fully implemented.
+One of these functionalities was a transactions storage class that tracked how much money was 
+added or spent by each card. Another was a functionality to use the pin number associated with a 
+card to access the card's functions. These functionalities were planned to be included in the final
+iteration of the project, but were left out to ensure more attention could be spent on making sure the 
+critical parts of the project such as the file storage system worked well.

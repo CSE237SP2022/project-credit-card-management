@@ -85,15 +85,13 @@ public class Account {
 		return false;
 	}
 
-	public void makeDebitCard()
-	{
+	public void makeDebitCard(){
 		int pin = 1234;
 		DebitCard newDebitCard = new DebitCard(this.legalName, pin);
 		this.debitCards.add(newDebitCard);
 	}
 	
-	public void makeCreditCard()
-	{
+	public void makeCreditCard(){
 		int pin = 1234; 
 		CreditCard newCreditCard = new CreditCard(this.legalName, pin, this.grossIncome);
 		this.creditCards.add(newCreditCard);
@@ -122,10 +120,8 @@ public class Account {
 	
 	public CreditCard containsCreditCard(String cardNumber)
 	{	
-		for(CreditCard card : this.creditCards)
-		{
-			if (card.getCardNumber().equals(cardNumber))
-			{
+		for(CreditCard card : this.creditCards){
+			if (card.getCardNumber().equals(cardNumber)){
 				return card;
 			}
 		}
@@ -158,8 +154,5 @@ public class Account {
 		}
 		
 		System.out.println("Edit successful");
-		
 	}
-
-	
 }

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class Transaction {
 	
-	
-	
 	private double price;
 	private String merchant;
 	private String time;

@@ -48,18 +48,29 @@ public class ManagementSystem {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
+	}
+	
+	public int getNumAccounts() {
+		return numAccounts;
 	}
 	
 	public ArrayList<String> getAllUsernames(){
 		ArrayList<String> allUsernames = new ArrayList<String>();
 		
-		for (int i = 0 ; i < accounts.size(); i++)
-		{
+		for (int i = 0 ; i < accounts.size(); i++){
 			allUsernames.add(accounts.get(i).getUsername());
 		}
 		
 		return allUsernames;
+	}
+	
+	public Account getAccountFromUsername(String username) {
+		for(Account account : this.accounts) {
+			if(account.getUsername().equals(username)) {
+				return account;
+			}
+		}
+		return null;
 	}
 
 	public Account createAccountFile(String username, String password, String legalName, String streetAddress, int grossIncome) {
@@ -69,8 +80,7 @@ public class ManagementSystem {
 		return account;
 	}
 	
-	public Account createAccount(String username, String password, String legalName, String streetAddress, int grossIncome)
-	{
+	public Account createAccount(String username, String password, String legalName, String streetAddress, int grossIncome){
 		Account account = new Account(username, password, legalName, streetAddress, grossIncome);
 		accounts.add(account);
 		addAccountToFile(account);
@@ -142,19 +152,7 @@ public class ManagementSystem {
 			}
 		}
 		
-		return null;
-	}
-	
-	public int getNumAccounts() {
-		return numAccounts;
-	}
-	
-	public Account getAccountFromUsername(String username) {
-		for(Account account : this.accounts) {
-			if(account.getUsername().equals(username)) {
-				return account;
-			}
-		}
+		System.out.println("Username and password entered is not valid");
 		return null;
 	}
 

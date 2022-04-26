@@ -6,8 +6,7 @@ public class CreditCard extends Card
 	private double availableBalance;//Amount available
 	private double creditLimit;
 	
-	public CreditCard(String name, int pin, double annualIncome)
-	{
+	public CreditCard(String name, int pin, double annualIncome){
 		super(name, pin);
 		this.currentBalance = 0;
 		this.creditLimit = 0.1 * annualIncome;
@@ -23,18 +22,15 @@ public class CreditCard extends Card
 		this.setIsCreditCard(true);
 	}
 
-	public double getCurrentBalance()
-	{
+	public double getCurrentBalance(){
 		return this.currentBalance;
 	}
 	
-	public double getAvailableBalance()
-	{
+	public double getAvailableBalance(){
 		return this.availableBalance;
 	}
 	
-	public double getCreditLimit()
-	{
+	public double getCreditLimit(){
 		return this.creditLimit;
 	}
 	
@@ -50,7 +46,6 @@ public class CreditCard extends Card
 				System.out.println("Spend a valid amount");
 				return;
 			}
-		
 		} else {
 			System.out.println("Insufficient Funds");
 			return;
@@ -77,8 +72,7 @@ public class CreditCard extends Card
 				System.out.println("Pay a valid amount");
 				return;
 			}
-			
-		
+					
 		} else {
 			System.out.println("Payment excedes balance");
 			return;

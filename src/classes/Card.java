@@ -18,9 +18,7 @@ public class Card{
 	private int pin;
 	private boolean isCreditCard;
 	
-	public Card(String name, int pin)
-	{
-		//Auto-generate card number, CVV, and expiration date
+	public Card(String name, int pin){
 		this.name = name;
 		this.pin = pin;
 		this.cardNumber = generateCardNumber();
@@ -38,8 +36,7 @@ public class Card{
 	}
 	
 	
-	public String generateCardNumber()
-	{
+	public String generateCardNumber(){
 		Random rand = new Random();
 		String cardNumber = "";
 		
@@ -47,8 +44,7 @@ public class Card{
 		String firstDigitString = Integer.toString(firstDigit);
 		cardNumber += firstDigitString;
 		
-		for(int i = 0; i < 15; i++)
-		{
+		for(int i = 0; i < 15; i++){
 			int randomInt = rand.nextInt(10);
 			String randomIntString = Integer.toString(randomInt);
 			cardNumber += randomIntString;
@@ -57,13 +53,11 @@ public class Card{
 		return cardNumber;
 	}
 	
-	public String generateCVV()
-	{
+	public String generateCVV(){
 		Random rand = new Random();
 		String cardNumber = "";
 		
-		for(int i = 0; i < 3; i++)
-		{
+		for(int i = 0; i < 3; i++){
 			int randomInt = rand.nextInt(10);
 			String randomIntString = Integer.toString(randomInt);
 			cardNumber += randomIntString;
@@ -72,8 +66,7 @@ public class Card{
 		return cardNumber;
 	}
 	
-	public String generateExpDate()
-	{
+	public String generateExpDate(){
 		LocalDate today = java.time.LocalDate.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
 		String formattedDateString = today.format(formatter);
@@ -88,28 +81,23 @@ public class Card{
 		return expDate;
 	}
 	
-	public String getCardNumber()
-	{
+	public String getCardNumber(){
 		return this.cardNumber;
 	}
 	
-	public String getCardCVV()
-	{
+	public String getCardCVV(){
 		return this.CVV;
 	}
 	
-	public int getCardPin()
-	{
+	public int getCardPin(){
 		return this.pin;
 	}
 	
-	public String getName()
-	{
+	public String getName(){
 		return this.name;
 	}
 	
-	public String getExpDate() 
-	{
+	public String getExpDate() {
 		return this.expDate;
 	}
 	
